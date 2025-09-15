@@ -1,0 +1,8 @@
+streamlit>=1.28.0
+google-cloud-aiplatform>=1.38.0
+vertexai>=0.0.1
+firebase-admin>=6.2.0
+pyrebase4>=4.7.1
+PyPDF2>=3.0.1
+python-docx>=0.8.11
+python-dotenv>=1.0.0
