@@ -45,8 +45,9 @@ import datetime
 class FirebaseAuth:
     def __init__(self, config: Dict):
         # Initialize the Firebase Admin SDK
-        cred = credentials.Certificate(config)
-        firebase_admin.initialize_app(cred)
+        if not firebase_admin._apps:
+            cred = credentials.Certificate(config)
+            firebase_admin.initialize_app(cred)
         self.db = firestore.client()
         
     def sign_up(self, email: str, password: str, username: str) -> bool:
