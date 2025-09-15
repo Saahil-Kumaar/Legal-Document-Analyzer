@@ -8,8 +8,7 @@ from utils.helpers import load_config
 def main():
     st.set_page_config(
         page_title="Legal Document Analyzer",
-        page_icon="⚖️",
-        layout="wide"
+        page_icon="⚖️"
     )
     
     # Load configuration
