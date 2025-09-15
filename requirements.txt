@@ -6,3 +6,5 @@ pyrebase4>=4.7.1
 PyPDF2>=3.0.1
 python-docx>=0.8.11
 python-dotenv>=1.0.0
+streamlit_option_menu==0.4.0
+streamlit-option-menu==0.4.0
