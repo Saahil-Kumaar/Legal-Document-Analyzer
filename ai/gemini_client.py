@@ -217,4 +217,3 @@ class GeminiProcessor:
             st.error(f"Error parsing response: {e}")
             return {}
 
-
