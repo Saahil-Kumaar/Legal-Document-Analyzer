@@ -149,13 +149,7 @@ class GeminiProcessor:
         # ✅ Load credentials explicitly
         if "gcp_service_account" in st.secrets:  
             creds = service_account.Credentials.from_service_account_info(
-                st.secrets["gcp_service_account"],
-                scopes=["https://www.googleapis.com/auth/cloud-platform"]
-            )
-        else:
-            # fallback if running locally with env var
-            creds = service_account.Credentials.from_service_account_file(
-                os.environ["GOOGLE_APPLICATION_CREDENTIALS"],
+                st.secrets["firebase"],
                 scopes=["https://www.googleapis.com/auth/cloud-platform"]
             )
 
