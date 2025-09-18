@@ -2,13 +2,26 @@ import json
 import streamlit as st
 from datetime import datetime
 
+# def load_config():
+#     """Load configuration from Streamlit secrets"""
+#     return {
+#         'firebase': dict(st.secrets['firebase']),
+#         'project_id': st.secrets['google_cloud']['project_id'],
+#         'location': st.secrets['google_cloud']['location']
+#     }
 def load_config():
     """Load configuration from Streamlit secrets"""
-    return {
-        'firebase': dict(st.secrets['firebase']),
-        'project_id': st.secrets['google_cloud']['project_id'],
-        'location': st.secrets['google_cloud']['location']
-    }
+    try:
+        return {
+            'firebase': dict(st.secrets['firebase']),
+            'project_id': st.secrets['google_cloud']['project_id'],
+            'location': st.secrets['google_cloud']['location']
+        }
+    except KeyError as e:
+        st.error(f"Missing configuration in secrets: {e}")
+        st.error("Please ensure firebase and google_cloud sections are properly configured in secrets.toml")
+        st.stop()
+
 
 def save_analysis_history(user_id: str, analysis: dict):
     """Save analysis to user history"""
