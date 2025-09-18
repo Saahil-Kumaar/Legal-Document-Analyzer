@@ -12,6 +12,7 @@ class GeminiProcessor:
     def __init__(self, project_id: str, location: str = "us-central1"):    
         credentials = service_account.Credentials.from_service_account_info(st.secrets["firebase"])
         vertexai.init(project=project_id, location=location, credentials=credentials)
+        self.model = GenerativeModel("gemini-2.5-flash")
 
     def analyze_document(self, document_content: str, document_type: str = "legal") -> dict:
         """
