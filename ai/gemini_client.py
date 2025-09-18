@@ -9,10 +9,32 @@ class GeminiProcessor:
     # def __init__(self, project_id: str, location: str = "us-central1"):
     #     vertexai.init(project=project_id, location=location)
     #     self.model = GenerativeModel("gemini-2.5-flash")
-    def __init__(self, project_id: str, location: str = "us-central1"):    
-        credentials = service_account.Credentials.from_service_account_info(st.secrets["firebase"])
-        vertexai.init(project=project_id, location=location, credentials=credentials)
-        self.model = GenerativeModel("gemini-2.5-flash")
+    # def __init__(self, project_id: str, location: str = "us-central1"):    
+    #     credentials = service_account.Credentials.from_service_account_info(st.secrets["firebase"])
+    #     vertexai.init(project=project_id, location=location, credentials=credentials)
+    #     self.model = GenerativeModel("gemini-2.5-flash")
+    def __init__(self, project_id: str, location: str = "us-central1"):
+        try:
+            # Get credentials from Streamlit secrets
+            import streamlit as st
+            from google.oauth2 import service_account
+            
+            credentials = service_account.Credentials.from_service_account_info(
+                st.secrets["firebase"]
+            )
+            
+            # Initialize Vertex AI with explicit credentials
+            vertexai.init(project=project_id, location=location, credentials=credentials)
+            
+            # Initialize the model AFTER successful vertexai.init()
+            self.model = GenerativeModel("gemini-2.5-flash")
+            
+        except Exception as e:
+            st.error(f"Failed to initialize Gemini processor: {e}")
+            # Set a fallback to prevent attribute errors
+            self.model = None
+            raise e
+
 
     def analyze_document(self, document_content: str, document_type: str = "legal") -> dict:
         """
