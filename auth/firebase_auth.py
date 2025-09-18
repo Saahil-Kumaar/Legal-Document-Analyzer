@@ -45,10 +45,18 @@ import datetime
 class FirebaseAuth:
     def __init__(self, config: Dict):
         # Initialize the Firebase Admin SDK
-        if not firebase_admin._apps:
+        # if not firebase_admin._apps:
+        #     cred = credentials.Certificate(config)
+        #     firebase_admin.initialize_app(cred)
+        # self.db = firestore.client()
+        #if not firebase_admin._apps:
+        try:
+            # Use service account info from Streamlit secrets
             cred = credentials.Certificate(config)
             firebase_admin.initialize_app(cred)
-        self.db = firestore.client()
+        except Exception as e:
+            st.error(f"Firebase initialization failed: {e}")
+            raise e
         
     def sign_up(self, email: str, password: str, username: str) -> bool:
         try:
