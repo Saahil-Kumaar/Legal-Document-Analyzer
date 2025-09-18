@@ -17,8 +17,19 @@ def main():
     # Initialize services
     if 'firebase_auth' not in st.session_state:
         st.session_state.firebase_auth = FirebaseAuth(config['firebase'])
+    # if 'gemini_processor' not in st.session_state:
+    #     st.session_state.gemini_processor = GeminiProcessor(config['project_id'])
     if 'gemini_processor' not in st.session_state:
-        st.session_state.gemini_processor = GeminiProcessor(config['project_id'])
+        try:
+            st.session_state.gemini_processor = GeminiProcessor(
+                config['project_id'], 
+                config['location']
+            )
+        except Exception as e:
+            st.error(f"Failed to initialize Gemini processor: {e}")
+            st.error("Please check your Google Cloud credentials in secrets.toml")
+            st.stop()
+
     
     # Authentication flow
     if 'user' not in st.session_state:
