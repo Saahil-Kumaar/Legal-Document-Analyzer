@@ -128,6 +128,9 @@ The application leverages Google's Gemini 2.5 Flash model to provide:
 - **Privacy-First**: No permanent storage of sensitive document content
 - **Encrypted Communications**: All data transmission is encrypted
 
+## 📷 Screenshot
+![Screenshot here](images/final.jpg)
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
